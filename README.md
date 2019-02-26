@@ -43,3 +43,8 @@
 ![2](https://user-images.githubusercontent.com/44984892/53441005-6c3c9500-3a38-11e9-9c43-2d06e22865a1.png)
 
 ส่วนกรณี 10 epoch เกิด overfitting เข่นเดียวกันกับ DAN1
+
+## Deep Averaging Network 2 with Dropout
+* Layers: 127813 > 300 > 200 > 100 > 30 > 12
+* dropout rate = 0.2
+* optimizer = adam, loss function = cross entropy

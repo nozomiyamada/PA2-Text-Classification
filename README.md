@@ -1,4 +1,8 @@
 # PA2-Text-Classification
+## Maximum Entropy
+
+* Accuracy of train data: 
+* Accuracy of development data: 
 
 ## DAN 1
 * word embedding - Thairath Corpus (skip-gram, 20epoch, 300dim)

@@ -4,7 +4,7 @@
 * Accuracy of train data: 
 * Accuracy of development data: 
 
-## DAN 1
+## Deep Averaging Network 1
 * word embedding - Thairath Corpus (skip-gram, 20epoch, 300dim)
 * ฝึกโมเดลโดยใช้ keras
 * 3 hidden layers: 300 > 200 > 100 > 50 > 12

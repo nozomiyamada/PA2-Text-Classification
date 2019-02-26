@@ -1,8 +1,9 @@
 # PA2-Text-Classification
-## Maximum Entropy
-
-* Accuracy of train data: 
-* Accuracy of development data: 
+<pre>
+DAN model train and test accuracies
+0.7360195736989442
+0.6202746489739238
+</pre>
 
 ## Deep Averaging Network 1
 * word embedding - Thairath Corpus (500,000articles, skip-gram, 20epoch, 300dim)

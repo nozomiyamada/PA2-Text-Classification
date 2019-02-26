@@ -18,4 +18,4 @@
 
 ![image](https://user-images.githubusercontent.com/44984892/53393603-6363a900-39cf-11e9-84dc-c9768686df1c.png)
 
-ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ เพราะฉะนั้นจะใช้โมเดล 50 epoch 
+ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ เพราะฉะนั้นจะใช้โมเดล 30 epoch 

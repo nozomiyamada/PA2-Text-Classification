@@ -16,6 +16,6 @@
 |train accuracy| 0.6820 | 0.7134 | 0.7580 | 0.8855 |
 |validate accuracy| 0.6324 | 0.6877 | 0.6784 | 0.6341 |
 
-ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้น
-
 ![image](https://user-images.githubusercontent.com/44984892/53393603-6363a900-39cf-11e9-84dc-c9768686df1c.png)
+
+ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ เพราะฉะนั้นจะใช้โมเดล epoch=50 

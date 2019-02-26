@@ -37,7 +37,7 @@
 ![unknown](https://user-images.githubusercontent.com/44984892/53440129-6940a500-3a36-11e9-9909-71849efe3460.png)
 ![unknown1](https://user-images.githubusercontent.com/44984892/53440136-6ba2ff00-3a36-11e9-8d03-fb9757530ab0.png)
 
-แค่ 5 epoch ก็ได้ accuracy สูงกว่า DAN1
+แค่ 5 epoch ก็ได้ accuracy สูงกว่า DAN1 (Accuracy 0.7857, Validation Accuracy 0.6923)
 
 ![1](https://user-images.githubusercontent.com/44984892/53441004-6c3c9500-3a38-11e9-8346-9be31058fdc5.png)
 ![2](https://user-images.githubusercontent.com/44984892/53441005-6c3c9500-3a38-11e9-9c43-2d06e22865a1.png)

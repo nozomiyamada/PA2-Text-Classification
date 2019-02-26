@@ -48,3 +48,6 @@
 * Layers: 127813 > 300 > 200 > 100 > 30 > 12
 * dropout rate = 0.2
 * optimizer = adam, loss function = cross entropy
+
+![dropout1](https://user-images.githubusercontent.com/44984892/53444671-626b5f80-3a41-11e9-8ad8-8427e7f343fb.png)
+![dropout2](https://user-images.githubusercontent.com/44984892/53444672-626b5f80-3a41-11e9-8ebc-5ecdf7a77b2b.png)

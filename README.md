@@ -16,9 +16,14 @@
 ![image](https://user-images.githubusercontent.com/44984892/53429716-be24f100-3a1f-11e9-984f-5432de5d8d47.png)
 ![image](https://user-images.githubusercontent.com/44984892/53429724-c2510e80-3a1f-11e9-84c4-dab668d2d793.png)
 
+
+
+![image](https://user-images.githubusercontent.com/44984892/53431039-52905300-3a22-11e9-8df4-0b8807892ac7.png)
+![image](https://user-images.githubusercontent.com/44984892/53431048-57ed9d80-3a22-11e9-86a7-2ef7f487741b.png)
+
 |epoch | 10 | 30 | 50 | 100 |
 |:-:|:-:|:-:|:-:|:-:|
-|train accuracy| 0.6808 | 0.7157 | 0.7579 | 0.8855 |
-|validate accuracy|0.6925 | 0.6872 | 0.6877 | 0.6341 |
+|train accuracy| 0.6808 | 0.7157 | 0.7579 | 0.8830 |
+|validate accuracy|0.6925 | 0.6872 | 0.6877 | 0.6507 |
 
 ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ เพราะฉะนั้นจะใช้โมเดล 40 epoch 

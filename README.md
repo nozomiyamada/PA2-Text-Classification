@@ -5,7 +5,7 @@
 * Accuracy of development data: 
 
 ## Deep Averaging Network 1
-* word embedding - Thairath Corpus (skip-gram, 20epoch, 300dim)
+* word embedding - Thairath Corpus (500,000articles, skip-gram, 20epoch, 300dim)
 * ฝึกโมเดลโดยใช้ keras
 * 3 hidden layers: 300 > 200 > 100 > 50 > 12
 * optimizer = adam, loss function = cross entropy
@@ -28,3 +28,8 @@
 |validate accuracy|0.6925 | 0.6872 | 0.6877 | 0.6507 |
 
 ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ เพราะฉะนั้นจะใช้โมเดล 40 epoch 
+
+## Deep Averaging Network 2
+* ฝึกโมเดลโดยใช้ keras (ใช้ Tesla K80 GPU บน Google Colab)
+* Layers: 127813 > 300 > 100 > 30 > 12
+* optimizer = adam, loss function = cross entropy

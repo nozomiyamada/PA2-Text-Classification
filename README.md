@@ -1,8 +1,14 @@
 # PA2-Text-Classification
 <pre>
+MaxEnt model train and test accuracies
+0.869949522780876
+0.6356272180219102
 DAN model train and test accuracies
-0.7360195736989442
-0.6202746489739238
+0.7137566953953314
+0.6219719179139022
+DAN model2 train and test accuracies
+0.7782749575682765
+0.5847091498225583
 </pre>
 
 ## Deep Averaging Network 1

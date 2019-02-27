@@ -28,7 +28,11 @@ DAN model2 train and test accuracies
 |train accuracy| 0.6808 | 0.7157 | 0.7579 | 0.8830 |
 |validate accuracy|0.6925 | 0.6872 | 0.6877 | 0.6507 |
 
-ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ เพราะฉะนั้นจะใช้โมเดล 40 epoch 
+ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ
+
+## Deep Averaging Network with Dropout
+
+
 
 ## Deep Averaging Network 2
 * ฝึกโมเดลโดยใช้ keras (ใช้ Tesla K80 GPU บน Google Colab)

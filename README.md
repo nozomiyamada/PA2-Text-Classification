@@ -7,8 +7,8 @@ DAN model train and test accuracies
 0.7137566953953314
 0.6219719179139022
 DAN model2 train and test accuracies
-0.7782749575682765
-0.5847091498225583
+0.7750126744109154
+0.6161857738003395
 </pre>
 
 ## Deep Averaging Network 1

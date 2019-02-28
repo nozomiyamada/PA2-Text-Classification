@@ -66,7 +66,7 @@ DAN model2 train and test accuracies
 ![drop5relu1](https://user-images.githubusercontent.com/44984892/53578463-56e77800-3baa-11e9-8356-49e01cad9122.png)
 ![drop5relu2](https://user-images.githubusercontent.com/44984892/53578465-56e77800-3baa-11e9-8c17-8adc5f5e4ff6.png)
 
-## สรุป
+# สรุป
 ### * ถ้า epoch น้อย relu จะฝีกเร็วกว่า sigmoid (เพราะไม่มี vanishing gradient)
 ### * Relu ตกเป็น overfitting ง่าย ถ้ามี dropout และใช้ sigmoid ก็หลีกเลี่ยงได้ แต่ใช้เวลานานกว่า
 ### * DAN2 train accuracy สูงขึ้นเร็วกว่า DAN1

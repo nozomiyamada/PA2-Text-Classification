@@ -54,6 +54,6 @@ DAN model2 train and test accuracies
 
 
 ### Relu, dropout 0.5, 30 epoch
-![drop5relu1](https://user-images.githubusercontent.com/44984892/53571672-108b1c80-3b9c-11e9-8c54-b7f124af80aa.png)
-![drop5relu2](https://user-images.githubusercontent.com/44984892/53571673-1123b300-3b9c-11e9-9723-53eea1851dd5.png)
+![drop5relu1](https://user-images.githubusercontent.com/44984892/53578463-56e77800-3baa-11e9-8356-49e01cad9122.png)
+![drop5relu2](https://user-images.githubusercontent.com/44984892/53578465-56e77800-3baa-11e9-8c17-8adc5f5e4ff6.png)
 

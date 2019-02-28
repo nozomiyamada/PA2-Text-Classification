@@ -3,9 +3,9 @@
 MaxEnt model train and test accuracies
 0.869949522780876
 0.6356272180219102
-DAN model train and test accuracies (80epoch, dropout 0.5)
-0.7132276765049486
-0.6310754513192408
+DAN model train and test accuracies (150epoch, dropout 0.5)
+0.735159918002072
+0.6380188242555161
 DAN model2 train and test accuracies
 0.7750126744109154
 0.6161857738003395

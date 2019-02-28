@@ -32,6 +32,10 @@ DAN model2 train and test accuracies
 
 ## Deep Averaging Network with Dropout
 
+* 150 epoch, dropout 0.55
+* 3 hidden layers: 300 > 200 > 100 > 50 > 12
+* optimizer = adam, loss function = cross entropy
+
 ![image](https://user-images.githubusercontent.com/44984892/53562029-e37e4000-3b82-11e9-8edc-589983f4009e.png)
 ![image](https://user-images.githubusercontent.com/44984892/53562043-eb3de480-3b82-11e9-89ee-29c254d4e215.png)
 

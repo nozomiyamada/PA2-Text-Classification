@@ -53,6 +53,8 @@ DAN model2 train and test accuracies
 ### Sigmoid, no dropout, 10epoch
 
 ### Relu, no dropout, 10epoch
+![drop0relu1](https://user-images.githubusercontent.com/44984892/53581614-7d101680-3bb0-11e9-9c61-d51f36ce517e.png)
+![drop0relu2](https://user-images.githubusercontent.com/44984892/53581651-8dc08c80-3bb0-11e9-9932-236368214301.png)
 
 ### Sigmoid, dropout 0.5, 30epoch
 ![drop5sig1](https://user-images.githubusercontent.com/44984892/53580372-08d47380-3bae-11e9-8be1-3cc5814751b1.png)

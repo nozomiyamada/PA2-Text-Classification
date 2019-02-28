@@ -17,18 +17,13 @@ DAN model2 train and test accuracies
 * 3 hidden layers: 300 > 200 > 100 > 50 > 12
 * optimizer = adam, loss function = cross entropy
 
-![image](https://user-images.githubusercontent.com/44984892/53429716-be24f100-3a1f-11e9-984f-5432de5d8d47.png)
-![image](https://user-images.githubusercontent.com/44984892/53429724-c2510e80-3a1f-11e9-84c4-dab668d2d793.png)
+## Sigmoid, no dropout
+![image](https://user-images.githubusercontent.com/44984892/53571861-7a0b2b00-3b9c-11e9-8bfd-42567065d863.png)
+![image](https://user-images.githubusercontent.com/44984892/53571890-87c0b080-3b9c-11e9-86f5-1fa11161679b.png)
 
-![image](https://user-images.githubusercontent.com/44984892/53431039-52905300-3a22-11e9-8df4-0b8807892ac7.png)
-![image](https://user-images.githubusercontent.com/44984892/53431048-57ed9d80-3a22-11e9-86a7-2ef7f487741b.png)
-
-|epoch | 10 | 30 | 50 | 100 |
-|:-:|:-:|:-:|:-:|:-:|
-|train accuracy| 0.6808 | 0.7157 | 0.7579 | 0.8830 |
-|validate accuracy|0.6925 | 0.6872 | 0.6877 | 0.6507 |
-
-ในกรณี 100 epoch มันน่าจะ overfitting เพราะ validation loss ขึ้นเยอะ
+## Relu, no dropout
+![image](https://user-images.githubusercontent.com/44984892/53571256-03b9f900-3b9b-11e9-83be-8e91ef676316.png)
+![image](https://user-images.githubusercontent.com/44984892/53571259-07e61680-3b9b-11e9-9d64-c5c73fc07d57.png)
 
 ## Deep Averaging Network with Dropout
 

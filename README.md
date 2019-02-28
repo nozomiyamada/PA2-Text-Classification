@@ -30,6 +30,14 @@ DAN model2 train and test accuracies
 * 3 hidden layers: 300 > 200 > 100 > 50 > 12
 * optimizer = adam, loss function = cross entropy
 
+### Sigmoid, 100 epoch, dropout 0.2
+![image](https://user-images.githubusercontent.com/44984892/53574649-9316da80-3ba2-11e9-9e93-27b9b20a0f80.png)
+![image](https://user-images.githubusercontent.com/44984892/53574656-98742500-3ba2-11e9-9036-e11aaed1556c.png)
+
+### Relu, 100 epoch, dropout 0.2
+![image](https://user-images.githubusercontent.com/44984892/53576373-138b0a80-3ba6-11e9-8803-600a26a88b7e.png)
+![image](https://user-images.githubusercontent.com/44984892/53576396-1be34580-3ba6-11e9-9983-241b7faae22c.png)
+
 ### Sigmoid, 150 epoch, dropout 0.55
 
 ![image](https://user-images.githubusercontent.com/44984892/53562029-e37e4000-3b82-11e9-8edc-589983f4009e.png)
@@ -44,23 +52,7 @@ DAN model2 train and test accuracies
 
 ## Deep Averaging Network 2
 * ฝึกโมเดลโดยใช้ keras (ใช้ Tesla K80 GPU บน Google Colab)
-* Layers: 127813 > 300 > 100 > 30 > 12
+* Layers: 127813 > 300 > 100 > 50 > 12
 * optimizer = adam, loss function = cross entropy
 
-![unknown](https://user-images.githubusercontent.com/44984892/53440129-6940a500-3a36-11e9-9909-71849efe3460.png)
-![unknown1](https://user-images.githubusercontent.com/44984892/53440136-6ba2ff00-3a36-11e9-8d03-fb9757530ab0.png)
 
-แค่ 5 epoch ก็ได้ accuracy สูงกว่า DAN1 (Accuracy 0.7857, Validation Accuracy 0.6923)
-
-![1](https://user-images.githubusercontent.com/44984892/53441004-6c3c9500-3a38-11e9-8346-9be31058fdc5.png)
-![2](https://user-images.githubusercontent.com/44984892/53441005-6c3c9500-3a38-11e9-9c43-2d06e22865a1.png)
-
-ส่วนกรณี 10 epoch เกิด overfitting เข่นเดียวกันกับ DAN1
-
-## Deep Averaging Network 2 with Dropout
-* Layers: 127813 > 300 > 200 > 100 > 30 > 12
-* dropout rate = 0.2
-* optimizer = adam, loss function = cross entropy
-
-![dropout1](https://user-images.githubusercontent.com/44984892/53444671-626b5f80-3a41-11e9-8ad8-8427e7f343fb.png)
-![dropout2](https://user-images.githubusercontent.com/44984892/53444672-626b5f80-3a41-11e9-8ebc-5ecdf7a77b2b.png)

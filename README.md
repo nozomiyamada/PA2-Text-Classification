@@ -32,8 +32,8 @@ DAN model2 train and test accuracies
 
 ## Deep Averaging Network with Dropout
 
-![image](https://user-images.githubusercontent.com/44984892/53536349-a7be8880-3b38-11e9-9ec4-3197eef72fba.png)
-![image](https://user-images.githubusercontent.com/44984892/53536356-ae4d0000-3b38-11e9-8247-9b6de4081734.png)
+![image](https://user-images.githubusercontent.com/44984892/53562029-e37e4000-3b82-11e9-8edc-589983f4009e.png)
+![image](https://user-images.githubusercontent.com/44984892/53562043-eb3de480-3b82-11e9-89ee-29c254d4e215.png)
 
 ## Deep Averaging Network 2
 * ฝึกโมเดลโดยใช้ keras (ใช้ Tesla K80 GPU บน Google Colab)

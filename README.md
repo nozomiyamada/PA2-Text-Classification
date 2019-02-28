@@ -71,4 +71,4 @@ DAN model2 train and test accuracies
 ### * Relu ตกเป็น overfitting ง่าย ถ้ามี dropout และใช้ sigmoid ก็หลีกเลี่ยงได้ แต่ใช้เวลานานกว่า
 ### * DAN2 train accuracy สูงขึ้นเร็วกว่า DAN1
 ### * DAN2 ถ้า epoch น้อย validation accuracy สูงกว่า DAN1 นิดหน่อย  แต่ถ้า epoch เยอะ แทบจะไม่ต่างกันหรือต่ำกว่า
-### * DAN2 แม้ว่าฝึกกี่ครั้งก็ตาม validation accuracy ไม่ขึ้น (อาจจะเป็นเพราะ ใน layer แรกมี node ที่ไม่ใช้เฉพาะตอน train แต่ไม่ใช้ตอน test เยอะ)
+### * DAN2 แม้ว่าฝึกกี่ครั้งก็ตาม validation accuracy ไม่ขึ้น (อาจจะเป็นเพราะ ใน layer แรกมี node ที่ใช้เฉพาะตอน train แต่ไม่ใช้ตอน test เยอะ)

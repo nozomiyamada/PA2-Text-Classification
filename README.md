@@ -51,7 +51,8 @@ DAN model2 train and test accuracies
 * optimizer = adam, loss function = cross entropy
 
 ## Sigmoid, dropout 0.5, 30epoch
-
+![drop5sig1](https://user-images.githubusercontent.com/44984892/53580372-08d47380-3bae-11e9-8be1-3cc5814751b1.png)
+![drop5sig2](https://user-images.githubusercontent.com/44984892/53580374-096d0a00-3bae-11e9-996d-46466fc5ac63.png)
 
 ### Relu, dropout 0.5, 30 epoch
 ![drop5relu1](https://user-images.githubusercontent.com/44984892/53578463-56e77800-3baa-11e9-8356-49e01cad9122.png)

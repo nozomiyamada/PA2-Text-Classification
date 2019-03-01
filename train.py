@@ -31,7 +31,7 @@ with open('title_classification.dev', 'r', encoding='utf-8') as f:
 def train_maxent():
     feature_matrix = []
     for title in titles:
-        # δ(w, s): if word is in sentence = 1, else 0
+        # if word is in sentence = 1, else 0
         feat_dic = {word: 1 for word in title}
         feature_matrix.append(feat_dic)
 
@@ -45,53 +45,52 @@ def train_maxent():
     
 wv = KeyedVectors.load_word2vec_format('skip.bin', binary=True)
 
+# for DAN2
+input_node = len(wv.vocab) + 1  # 127812 + 1
+output_node = len(set(labels))  # 12
 
-def train_dan():
+label_to_index = {label:i for i, label in enumerate(set(labels))}
+index_to_label = {v:k for k, v in label_to_index.items()}
+
+embedding_matrix = [[0]*300]
+vocab_to_index = {0:'<pad>'}
+for i, vocab in enumerate(wv.vocab.keys()):
+    embedding_matrix.append(wv[vocab])
+    vocab_to_index[vocab] = i+1
+
+
+def prepare_dan1():
 
     train_vec = []
     for title in titles:
-        sum_vec = 0
-        number = 0
-        for word in title:
-            if word in wv.vocab:
-                sum_vec += wv[word]
-                number += 1
-        if number == 0:
-            mean = [0]*300
+        vecs = [wv[word] for word in title if word in wv.vocab]
+        if vecs == []:
+            mean = np.zeros(300)
         else:
-            mean = sum_vec/number
+            mean = np.mean(np.array(vecs), axis=0)
         train_vec.append(mean)
-        
+    train_vec = np.array(train_vec).reshape((len(titles), 300))
+
     dev_vec = []
     for title in titles_dev:
-        sum_vec = 0
-        number = 0
-        for word in title:
-            if word in wv.vocab:
-                sum_vec += wv[word]
-                number += 1
-        if number == 0:
-            mean = [0]*300
+        vecs = [wv[word] for word in title if word in wv.vocab]
+        if vecs == []:
+            mean = np.zeros(300)
         else:
-            mean = sum_vec/number
+            mean = np.mean(np.array(vecs), axis=0)
         dev_vec.append(mean)
+    dev_vec = np.array(train_vec).reshape((len(titles), 300))
         
-    return np.array(train_vec).reshape((len(labels), 300)), np.array(dev_vec).reshape((len(labels_dev), 300))
+    return train_vec, dev_vec
+
 
 def train_dan1(train_vec, dev_vec, epo=10, drop=0.2, act='relu'):
-    
-    output_node = len(set(labels))  # 12
-    
-    
-    label_to_index = {label:i for i, label in enumerate(set(labels))}
-    index_to_label = {v:k for k, v in label_to_index.items()}
-    
+
     index_list = [label_to_index[label] for label in labels]
     train_y = np.eye(output_node)[index_list]  # one-hot vectors
     index_list = [label_to_index[label] for label in labels_dev]
     val_y = np.eye(output_node)[index_list]  # one-hot vectors
-    
-    
+
     model = Sequential()
 
     # input 300 > hidden 100
@@ -137,19 +136,7 @@ def train_dan1(train_vec, dev_vec, epo=10, drop=0.2, act='relu'):
     plt.show()
     
     joblib.dump((model, wv, index_to_label), 'dan_model.bin')
-    
 
-input_node = len(wv.vocab) + 1  # 127812 + 1
-output_node = len(set(labels))  # 12
-
-label_to_index = {label:i for i, label in enumerate(set(labels))}
-index_to_label = {v:k for k, v in label_to_index.items()}
-
-embedding_matrix = [[0]*300]
-vocab_to_index = {0:'<pad>'}
-for i, vocab in enumerate(wv.vocab.keys()):
-    embedding_matrix.append(wv[vocab])
-    vocab_to_index[vocab] = i+1
 
 def prepare_dan2():
     train_x = []
@@ -165,6 +152,7 @@ def prepare_dan2():
     dev_x = pad_sequences(dev_x, value=0, padding='post', maxlen=128)
     
     return np.array(train_x), np.array(dev_x)
+
 
 def train_dan2(train_x, val_x, epo=3, drop=0.3, act = 'relu'):
     

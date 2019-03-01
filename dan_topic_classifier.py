@@ -17,8 +17,10 @@ class DANTopicClassifier(TopicClassifier):
         tokenize title_text, get vectors of all words and append to the list
         if there are only UNK, returns zero vector
 
-        vecs = [[1,2,3...], [3,1,4...], ... ]
-        > np.mean(vecs, axis=0) = [2,1,5,... ]
+        title_text = 'ไปกินอาหาร'
+        > tokenized_title = ['ไป', 'กิน', 'อาหาร']
+        > vecs = [[11,2,5...], [3,-1,4...], [6,2,9...]]
+        > np.mean(vecs, axis=0) = [2,1,5,...]
         """
         tokenized_title = word_tokenize(title_text)
         vecs = []  # make the list of each word vector

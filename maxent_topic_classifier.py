@@ -15,5 +15,5 @@ class MaxEntTopicClassifier(TopicClassifier):
     def classify(self, title_text:str) -> str:
         feat_dic = {word: 1 for word in word_tokenize(title_text)}  # make feature dictionary of one title
         result = self.model.predict(self.DV.transform([feat_dic]))  # predict with model
-        return str(result[0])  # result = array(['คุณภาพชีวิต'], dtype='<U12')
+        return result[0][0]  # result = array(['คุณภาพชีวิต'], dtype='<U12')
 

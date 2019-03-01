@@ -79,7 +79,7 @@ def prepare_dan1():
         else:
             mean = np.mean(np.array(vecs), axis=0)
         dev_vec.append(mean)
-    dev_vec = np.array(train_vec).reshape((len(titles), 300))
+    dev_vec = np.array(dev_vec).reshape((len(titles_dev), 300))
         
     return train_vec, dev_vec
 

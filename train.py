@@ -3,6 +3,7 @@ import numpy as np
 from pythainlp import word_tokenize
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.neural_network import MLPClassifier
 DV = DictVectorizer()
 
 from keras.models import Sequential
@@ -83,6 +84,11 @@ def prepare_dan1():
         
     return train_vec, dev_vec
 
+def mlp_dan1(train_vec, dev_vec):
+    mlp = MLPClassifier(hidden_layer_sizes=((100,50)), activation='relu', solver='adam')
+    mlp.fit(train_vec, labels)
+    for i in range(10):
+        print(mlp.predict([dev_vec[i]])[0], labels_dev[i])
 
 def train_dan1(train_vec, dev_vec, epo=10, drop=0.2, act='relu'):
 

@@ -1,4 +1,3 @@
-import csv
 import joblib
 import numpy as np
 from pythainlp import word_tokenize
@@ -7,17 +6,24 @@ from sklearn.feature_extraction import DictVectorizer
 DV = DictVectorizer()
 
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Embedding
-from keras.utils.vis_utils import plot_model
-from keras.utils.np_utils import to_categorical
+from keras.layers import Dense, Activation, Embedding, Dropout, GlobalAveragePooling1D
+from keras.preprocessing.sequence import pad_sequences
 from gensim.models import KeyedVectors
 import matplotlib.pyplot as plt
 
+labels, titles = [], []
 with open('title_classification.train', 'r', encoding='utf-8') as f:
-    lines = list(csv.reader(f, delimiter='\t'))
-
-labels = [line[0] for line in lines]
-titles = [word_tokenize(line[1]) for line in lines]  # tokenized 2D list
+    for line in f:
+        label, title = line.split('\t', 1)
+        labels.append(label)
+        titles.append(word_tokenize(title.rstrip('\n')))
+        
+labels_dev, titles_dev = [], []
+with open('title_classification.dev', 'r', encoding='utf-8') as f:
+    for line in f:
+        label, title = line.split('\t', 1)
+        labels_dev.append(label)
+        titles_dev.append(word_tokenize(title.rstrip('\n')))
 
 
 ### maximum entropy ###
@@ -39,9 +45,10 @@ def train_maxent():
     
 wv = KeyedVectors.load_word2vec_format('skip.bin', binary=True)
 
+
 def train_dan():
 
-    title_vec = []
+    train_vec = []
     for title in titles:
         sum_vec = 0
         number = 0
@@ -53,35 +60,55 @@ def train_dan():
             mean = [0]*300
         else:
             mean = sum_vec/number
-        title_vec.append(mean)
-    return np.array(title_vec).reshape((len(labels), 300))
+        train_vec.append(mean)
+        
+    dev_vec = []
+    for title in titles_dev:
+        sum_vec = 0
+        number = 0
+        for word in title:
+            if word in wv.vocab:
+                sum_vec += wv[word]
+                number += 1
+        if number == 0:
+            mean = [0]*300
+        else:
+            mean = sum_vec/number
+        dev_vec.append(mean)
+        
+    return np.array(train_vec).reshape((len(labels), 300)), np.array(dev_vec).reshape((len(labels_dev), 300))
 
-def train_dan1(title_vec, epo=5):
+def train_dan1(train_vec, dev_vec, epo=10, drop=0.2, act='relu'):
     
     output_node = len(set(labels))  # 12
+    
     
     label_to_index = {label:i for i, label in enumerate(set(labels))}
     index_to_label = {v:k for k, v in label_to_index.items()}
     
     index_list = [label_to_index[label] for label in labels]
     train_y = np.eye(output_node)[index_list]  # one-hot vectors
+    index_list = [label_to_index[label] for label in labels_dev]
+    val_y = np.eye(output_node)[index_list]  # one-hot vectors
     
     
     model = Sequential()
 
     # input 300 > hidden 100
     model.add(Dense(200, input_dim=300))
-    model.add(Activation('sigmoid'))
-    #model.add(Activation('relu'))
+    model.add(Activation(act))
+    model.add(Dropout(drop))
     
     # input 150 > hidden 50
     model.add(Dense(100))
-    model.add(Activation('sigmoid'))
+    model.add(Activation(act))
+    model.add(Dropout(drop))
     
     model.add(Dense(50))
-    model.add(Activation('sigmoid'))
+    model.add(Activation(act))
+    model.add(Dropout(drop))
 
-    # hidden 50 > output
+    # hidden 50 > output 12
     model.add(Dense(output_node))
     model.add(Activation('softmax'))
 
@@ -89,14 +116,21 @@ def train_dan1(title_vec, epo=5):
     model.compile(optimizer='adam', loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
-    history = model.fit(title_vec, train_y, verbose=1, validation_split=0.1, epochs=epo)
-    score = model.evaluate(title_vec, train_y, verbose=1)
+    history = model.fit(train_vec, train_y, verbose=1, validation_data=(dev_vec, val_y), epochs=epo)
+    score = model.evaluate(train_vec, train_y, verbose=1)
     print('evaluate loss: {0[0]}\n evaluate acc: {0[1]}'.format(score))
 
     # plot accuracy
+    plt.plot(history.history['acc'], marker='o', label='Training accuracy')
+    plt.plot(history.history['val_acc'], marker='D', label='Validation accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(loc='best')
+    plt.show()
+    
+    plt.figure()
     plt.plot(history.history['loss'], marker='o', label='Training loss')
     plt.plot(history.history['val_loss'], marker='D', label='Validation loss')
-    #plt.plot(history.history['acc'], label='acc', ls='-', marker='o')
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(loc='best')
@@ -104,37 +138,66 @@ def train_dan1(title_vec, epo=5):
     
     joblib.dump((model, wv, index_to_label), 'dan_model.bin')
     
+
+input_node = len(wv.vocab) + 1  # 127812 + 1
+output_node = len(set(labels))  # 12
+
+label_to_index = {label:i for i, label in enumerate(set(labels))}
+index_to_label = {v:k for k, v in label_to_index.items()}
+
+embedding_matrix = [[0]*300]
+vocab_to_index = {0:'<pad>'}
+for i, vocab in enumerate(wv.vocab.keys()):
+    embedding_matrix.append(wv[vocab])
+    vocab_to_index[vocab] = i+1
+
+def prepare_dan2():
+    train_x = []
+    for i, title in enumerate(titles):
+        indexes = [vocab_to_index[vocab] for vocab in set(title) if vocab in wv.vocab]
+        train_x.append(indexes)
+    train_x = pad_sequences(train_x, value=0, padding='post', maxlen=128)
     
-def train_dan2(title_vec, epo=1):
+    dev_x = []
+    for i, title in enumerate(titles_dev):
+        indexes = [vocab_to_index[vocab] for vocab in set(title) if vocab in wv.vocab]
+        dev_x.append(indexes)
+    dev_x = pad_sequences(dev_x, value=0, padding='post', maxlen=128)
     
-    input_node = len(wv.vocab)  # 127812
-    output_node = len(set(labels))  # 12
+    return np.array(train_x), np.array(dev_x)
+
+def train_dan2(train_x, val_x, epo=3, drop=0.3, act = 'relu'):
     
-    label_to_index = {label:i for i, label in enumerate(set(labels))}
-    index_to_label = {v:k for k, v in label_to_index.items()}
-    
+    # make train_y = 12 dim one-hot vector   
     index_list = [label_to_index[label] for label in labels]
-    train_y = np.eye(output_node)[index_list]  # one-hot vectors
+    train_y = np.eye(output_node)[index_list]  # make one-hot vectors
     
+    index_list = [label_to_index[label] for label in labels_dev]
+    val_y = np.eye(output_node)[index_list]  # make one-hot vectors
     
     model = Sequential()
-    
-    embedding_matrix = []
-    vocab_to_index = {}
-    for i, vocab in enumerate(wv.vocab):
-        embedding_matrix.append(wv[vocab])
-        vocab_to_index[vocab] = i
 
-    # input layer 300 dim vector
+    # input layer
     model.add(Embedding(input_node, 300, weights=[np.array(embedding_matrix)]))
-    #model.add(keras.layers.GlobalAveragePooling1D())
+    model.add(GlobalAveragePooling1D())
+    model.add(Dropout(drop))
+    
+    # > hidden 200
+    model.add(Dense(200))
+    model.add(Activation(act))
+    model.add(Dropout(drop))
 
-    # input 300 > hidden 100
-    model.add(Dense(30))
-    model.add(Activation('sigmoid'))
-    #model.add(Activation('relu'))
+    # > hidden 100
+    model.add(Dense(100))
+    model.add(Activation(act))
+    model.add(Dropout(drop))
+    
+    # > hidden 50
+    model.add(Dense(50))
+    model.add(Activation(act))
+    model.add(Dropout(drop))
 
-    # hidden 100 > output
+    # > output 12
     model.add(Dense(output_node))
     model.add(Activation('softmax'))
 
@@ -142,17 +205,24 @@ def train_dan2(title_vec, epo=1):
     model.compile(optimizer='adam', loss='categorical_crossentropy',
                   metrics=['accuracy'])
 
-    history = model.fit(title_vec, train_y, verbose=1, validation_split=0.2, epochs=epo)
-    score = model.evaluate(title_vec, train_y, verbose=1)
+    history = model.fit(train_x, train_y, verbose=1, validation_data=(val_x, val_y), epochs=epo)
+    score = model.evaluate(train_x, train_y, verbose=1)
     print('evaluate loss: {0[0]}\n evaluate acc: {0[1]}'.format(score))
 
     # plot accuracy
+    plt.plot(history.history['acc'], marker='o', label='Training accuracy')
+    plt.plot(history.history['val_acc'], marker='D', label='Validation accuracy')
+    plt.ylabel('accuracy')
+    plt.xlabel('epoch')
+    plt.legend(loc='best')
+    plt.show()
+    
+    plt.figure()
     plt.plot(history.history['loss'], marker='o', label='Training loss')
     plt.plot(history.history['val_loss'], marker='D', label='Validation loss')
-    #plt.plot(history.history['acc'], label='acc', ls='-', marker='o')
     plt.ylabel('loss')
     plt.xlabel('epoch')
     plt.legend(loc='best')
     plt.show()
     
-    joblib.dump((model, wv, index_to_label), 'dan2_model.bin')
+    joblib.dump((model, vocab_to_index, index_to_label), 'dan2_model.bin')

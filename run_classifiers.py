@@ -38,18 +38,18 @@ if __name__ == '__main__':
     print('Majority classification train and test accuracies')
     evaluate_classifier(mjc, 'title_classification.train')
     evaluate_classifier(mjc, 'title_classification.dev')
-    
+    """
     maxent = MaxEntTopicClassifier('maxent_model.bin')
     print('MaxEnt model train and test accuracies')
     evaluate_classifier(maxent, 'title_classification.train')
     evaluate_classifier(maxent, 'title_classification.dev')
-    """
+    
     dan1 = DANTopicClassifier('dan_model.bin')
     print('DAN model train and test accuracies')
     evaluate_classifier(dan1, 'title_classification.train')
     evaluate_classifier(dan1, 'title_classification.dev')
 
     dan2 = DANTopicClassifier2('dan2_model.bin')
-    print ('DAN model2 train and test accuracies')
+    print('DAN model2 train and test accuracies')
     evaluate_classifier(dan2, 'title_classification.train')
     evaluate_classifier(dan2, 'title_classification.dev')

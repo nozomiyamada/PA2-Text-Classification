@@ -47,7 +47,7 @@ DAN model2 train and test accuracies
 
 ## Deep Averaging Network 2
 * ฝึกโมเดลโดยใช้ keras (ใช้ Tesla K80 GPU บน Google Colab)
-* Layers: 127813 > 300 > 100 > 50 > 12
+* Layers: 127813 > 200 > 300 > 100 > 50 > 12
 * optimizer = adam, loss function = cross entropy
 
 ### Sigmoid, no dropout, 10epoch
